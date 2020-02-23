@@ -17,7 +17,7 @@ class etudy(val a:String):My{
 
 }
 
-fun main(){
+fun main3(){
     println("fddgdf")
 
     val fn = {a:Int -> 2*a}
