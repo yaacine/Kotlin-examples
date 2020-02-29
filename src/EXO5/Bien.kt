@@ -1,6 +1,6 @@
 package EXO5
 
-abstract class Bien (valeur: Double) {
+abstract class Bien (valeur: Double)  : ICalculImpos{
 
     private var _valeur :Double =0.0
 
