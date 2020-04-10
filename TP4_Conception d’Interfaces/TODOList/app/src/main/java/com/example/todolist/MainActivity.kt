@@ -1,5 +1,6 @@
 package com.example.todolist
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.SparseBooleanArray
@@ -8,10 +9,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import kotlinx.android.synthetic.main.activity_main.*
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,8 +25,15 @@ class MainActivity : AppCompatActivity() {
         // another list to keep the date of the todo item
         var dataList = arrayListOf<TodoItem>()
         var adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, itemlist)
+        listView.adapter =  adapter
+        //populating dataList with some initial Todos for examples
+        var todo1 = TodoItem("task for today" ,LocalDate.now().toString())
+        var todo2 = TodoItem("task for tomorrow" ,LocalDate.now().plusDays(1).toString())
+        var todo3 = TodoItem("task for next month" ,LocalDate.now().plusMonths(1).toString())
 
-
+        dataList.add(todo1)
+        dataList.add(todo2)
+        dataList.add(todo3)
 
         // setting the spinner to select witch data to display
         val languages = resources.getStringArray(R.array.displays)
@@ -36,8 +47,61 @@ class MainActivity : AppCompatActivity() {
 
             spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
+                @RequiresApi(Build.VERSION_CODES.O)
                 override fun onItemSelected(parent: AdapterView<*>,
                                             view: View, position: Int, id: Long) {
+                    print("posiotionnn====>"+position)
+                    val current = LocalDate.now()
+
+                    when(position){
+                        0 -> {
+                            itemlist.clear()
+
+                            // getting today's todos
+                            for (elt in dataList){
+                                var parsedDate = LocalDate.parse(elt.date)
+                                if(parsedDate.isEqual(current)){
+                                    itemlist.add(elt.content)
+                                }
+
+                            }
+
+                            adapter.notifyDataSetChanged()
+
+                        }
+
+                        1 ->{
+                            itemlist.clear()
+
+                            // getting week's todos
+                            for (elt in dataList){
+                                var parsedDate = LocalDate.parse(elt.date)
+                                if(!parsedDate.isAfter(current.plusWeeks(1))){
+                                    itemlist.add(elt.content)
+                                }
+                            }
+
+                            adapter.notifyDataSetChanged()
+
+                        }
+
+                        2-> {
+                            itemlist.clear()
+
+                            // getting all todos
+                            for (elt in dataList){
+                                var parsedDate = LocalDate.parse(elt.date)
+                                itemlist.add(elt.content)
+                            }
+
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+
+
+
+
+
                     Toast.makeText(this@MainActivity,
                         getString(R.string.selected_item) + " " +
                                 "" + languages[position], Toast.LENGTH_SHORT).show()
@@ -50,10 +114,77 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        // menu listners for tablet landscape
+        all?.setOnClickListener{
+            itemlist.clear()
+
+            for (elt in dataList){
+                var parsedDate = LocalDate.parse(elt.date)
+                itemlist.add(elt.content)
+            }
+
+
+            adapter.notifyDataSetChanged()
+        }
+
+        week?.setOnClickListener{
+            val current = LocalDate.now()
+            itemlist.clear()
+
+            // getting week's todos
+            for (elt in dataList){
+                var parsedDate = LocalDate.parse(elt.date)
+                if(!parsedDate.isAfter(current.plusWeeks(1))){
+                    itemlist.add(elt.content)
+                }
+            }
+
+            adapter.notifyDataSetChanged()
+        }
+
+        day?.setOnClickListener{
+            val current = LocalDate.now()
+            itemlist.clear()
+            // getting today's todos
+            for (elt in dataList){
+                var parsedDate = LocalDate.parse(elt.date)
+                if(parsedDate.isEqual(current)){
+                    itemlist.add(elt.content)
+                }
+
+            }
+
+            adapter.notifyDataSetChanged()
+        }
+
+
+
+
+        // getting today's todos by default for small screens
+        val current = LocalDate.now()
+        println("currentdata ====> "+ current.toString())
+        itemlist.clear()
+
+        for (elt in dataList){
+            println("date of item ===>"+LocalDate.parse(elt.date))
+            var parsedDate = LocalDate.parse(elt.date)
+            if(parsedDate.isEqual(current)){
+
+                itemlist.add(elt.content)
+
+                adapter.notifyDataSetChanged()
+            }
+        }
+
 
         // Adding the items to the list when the add button is pressed
         add.setOnClickListener {
-            val newItem = TodoItem(editText.text.toString() , date1 = editTextDate.text.toString())
+            println("new date ====> "+editTextDate.text.toString().replace("/", "-"))
+            var entredDate = editTextDate.text.toString().replace("/", "-")
+            var elements = entredDate.split("-")
+            var correctDate = elements[2]+"-"+elements[1]+"-"+elements[0]
+            println("correctedate ===>" +correctDate)
+            val newItem = TodoItem(editText.text.toString() , date1 = correctDate)
             dataList.add(newItem)
             itemlist.add(editText.text.toString())
             listView.adapter =  adapter

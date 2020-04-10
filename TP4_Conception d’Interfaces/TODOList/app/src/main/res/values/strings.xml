@@ -2,8 +2,8 @@
     <string name="app_name">TODOList</string>
     <string name="selected_item">Selected item:</string>
     <string-array name="displays">
-        <item>All</item>
-        <item>Week</item>
         <item>Today</item>
+        <item>Week</item>
+        <item>All</item>
     </string-array>
 </resources>
