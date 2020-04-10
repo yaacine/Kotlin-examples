@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TP2EXO3</string>
+    <string-array name="name">
+        <item>mahdi</item>
+        <item>nassim</item>
+    </string-array>
+    <string-array name="description">
+        <item>mahdi is a simple html framworkmahdi is a simple html framwork</item>
+        <item>nassim</item>
+    </string-array>
+    <integer-array name="imageid">
+        <item>@drawable/yaacine</item>
+        <item>@drawable/aws</item>
+    </integer-array>
+    <string name="title_activity_bottom">bottomActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" >TP2EXO3</string>
+    <string-array name="name">
+        <item>اللاتنية</item>
+        <item>الأحرف</item>
+    </string-array>
+    <string-array name="description">
+        <item>تعريب الأحرف اللاتنيةتعريب الأحرف اللاتنيةتعريب الأحرف اللاتنية</item>
+        <item>تعريب الأحرف اللاتنيةتعريب الأحرف اللاتنيةتعريب الأحرف اللاتنيةتعريب الأحرف اللاتنيةتعريب الأحرف اللاتنيةتعريب الأحرف اللاتنية</item>
+    </string-array>
+    <string-array name="imageid">
+        <item>@drawable/yaacine</item>
+        <item>@drawable/aws</item>
+
+    </string-array>
+
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ResourcesExamples</string>
+    <string name="il_reste">Il reste</string>
+    <string name="textview">TextView</string>
+    <string name="tryStr">GO</string>
+    <string name="your_number">Your Number</string>
+
+
+
+
+</resources>

@@ -1,0 +1,2 @@
+include ':app', ':todoapp'
+rootProject.name='ResourcesExo3'

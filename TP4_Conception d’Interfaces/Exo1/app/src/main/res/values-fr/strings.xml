@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" >TP2EXO3</string>
+
+    <string-array name="name">
+        <item>mahdi</item>
+        <item>nassim</item>
+    </string-array>
+    <string-array name="description">
+        <item>mahdi2</item>
+        <item>nassim2mahdi is a simple html framworkmahdi is a simple html framwork</item>
+    </string-array>
+    <string-array name="imageid">
+        <item>@drawable/yaacine</item>
+        <item>@drawable/aws</item>
+    </string-array>
+</resources>
